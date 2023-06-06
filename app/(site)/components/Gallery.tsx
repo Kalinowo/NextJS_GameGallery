@@ -11,8 +11,12 @@ interface photo {
 
 export default function Gallery() {
   const [photos, setPhotos] = useState<photo[]>([]);
+  const options = {
+    headers: { "content-type": "utf-8" },
+  };
+
   useEffect(() => {
-    axios.get("/api/image/get").then((res) => {
+    axios.get("/api/image/get", options).then((res) => {
       setPhotos(res.data.reverse());
     });
   }, [photos]);
