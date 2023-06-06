@@ -22,7 +22,7 @@ export default function Gallery() {
   }, [photos]);
 
   return (
-    <div className="flex w-full h-full flex-wrap mt-5 gap-1">
+    <div className="flex w-full h-full flex-wrap my-5 gap-1">
       {photos.map((photo, index) => (
         <div
           key={photo.id}
