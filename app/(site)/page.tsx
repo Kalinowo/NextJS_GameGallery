@@ -1,12 +1,14 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
 import Feed from "./components/Feed";
 import Gallery from "./components/Gallery";
 
 export default function Home() {
+  const [forceRefresh, setForceRefresh] = useState<number>(0);
   return (
     <>
-      <Feed />
-      <Gallery />
+      <Feed setForceRefresh={setForceRefresh} />
+      <Gallery forceRefresh={forceRefresh} />
     </>
   );
 }

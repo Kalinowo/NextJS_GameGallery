@@ -8,13 +8,15 @@ import { FaTimes } from "react-icons/fa";
 interface PostModalProps {
   openPostModal: () => void;
   userId: any;
+  setForceRefresh: any;
 }
 
 const PostModal = (props: PostModalProps) => {
   const session = useSession();
-  const { openPostModal, userId } = props;
+  const { openPostModal, userId, setForceRefresh } = props;
   const modalRef = useRef<HTMLInputElement>(null);
   const [postInput, setPostInput] = useState<string>("");
+  const [blurHash, setBlurHash] = useState<string>("");
 
   function closePostModal(e: any) {
     if (modalRef.current === e.target) {
@@ -24,8 +26,9 @@ const PostModal = (props: PostModalProps) => {
   const postImage = (e: any) => {
     e.preventDefault();
     axios
-      .post("/api/image/new", { image: postInput, userId })
+      .post("/api/image/new", { image: postInput, userId, blurHash: blurHash })
       .then(() => {
+        setForceRefresh((prev: number) => prev + 1);
         console.log("成功");
       })
       .catch((err) => {
@@ -46,7 +49,7 @@ const PostModal = (props: PostModalProps) => {
       >
         <div className="">
           <div className="flex justify-center items-center w-[300px] h-auto bg-white border-solid border-2 border-black p-5 rounded-md">
-            <form className="w-full" onSubmit={postImage}>
+            <form className="w-full flex flex-col gap-2" onSubmit={postImage}>
               <div className="flex flex-row relative border-solid border-2 border-black rounded-md">
                 <input
                   value={postInput}
@@ -62,7 +65,22 @@ const PostModal = (props: PostModalProps) => {
                   />
                 </div>
               </div>
-              <div className="flex mt-1 gap-1">
+              <div className="flex flex-row relative border-solid border-2 border-black rounded-md">
+                <input
+                  value={blurHash}
+                  onChange={(e) => setBlurHash(e.target.value)}
+                  type="text"
+                  placeholder="blurhash"
+                  className="p-2 w-full outline-none border-none rounded-md"
+                />
+                <div className="relative right-1 flex items-center h-[40px]">
+                  <FaTimes
+                    className="cursor-pointer hover:text-red-500"
+                    onClick={() => clearInput()}
+                  />
+                </div>
+              </div>
+              <div className="flex gap-1">
                 <Button type="submit" flexBasis="60%" onClick={() => postImage}>
                   確定
                 </Button>

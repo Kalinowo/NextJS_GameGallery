@@ -4,11 +4,12 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { image, userId } = body;
+    const { image, userId, blurHash } = body;
     const post = await prisma.post.create({
       data: {
         image: image,
         userId: userId,
+        blurHash: blurHash,
       },
     });
     console.log(post);

@@ -1,4 +1,8 @@
-import("next").NextConfig;
-const nextConfig = {};
+// import("next").NextConfig;
+const nextConfig = {
+  images: {
+    domains: ["i.imgur.com"],
+  },
+};
 
-// module.exports = nextConfig
+module.exports = nextConfig;
