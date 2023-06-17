@@ -36,10 +36,6 @@ const PostModal = (props: PostModalProps) => {
       });
   };
 
-  function clearInput() {
-    setPostInput("");
-  }
-
   return (
     <>
       <div
@@ -61,7 +57,7 @@ const PostModal = (props: PostModalProps) => {
                 <div className="relative right-1 flex items-center h-[40px]">
                   <FaTimes
                     className="cursor-pointer hover:text-red-500"
-                    onClick={() => clearInput()}
+                    onClick={() => setPostInput("")}
                   />
                 </div>
               </div>
@@ -76,7 +72,7 @@ const PostModal = (props: PostModalProps) => {
                 <div className="relative right-1 flex items-center h-[40px]">
                   <FaTimes
                     className="cursor-pointer hover:text-red-500"
-                    onClick={() => clearInput()}
+                    onClick={() => setBlurHash("")}
                   />
                 </div>
               </div>
