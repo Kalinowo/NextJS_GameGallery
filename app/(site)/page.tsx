@@ -1,14 +1,35 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Feed from "./components/Feed";
 import Gallery from "./components/Gallery";
+import axios from "axios";
+
+interface photo {
+  createdAt: String;
+  id: React.Key;
+  image: string;
+  userId: String;
+  blurHash: string;
+}
 
 export default function Home() {
-  const [forceRefresh, setForceRefresh] = useState<number>(0);
+  const [photos, setPhotos] = useState<photo[]>([]);
+
+  const options = {
+    headers: { "content-type": "utf-8" },
+  };
+
+  useEffect(() => {
+    axios.get("/api/image/get", options).then((res) => {
+      console.log("sending get request");
+      setPhotos(res.data.reverse());
+    });
+  }, []);
+
   return (
     <>
-      <Feed setForceRefresh={setForceRefresh} />
-      <Gallery forceRefresh={forceRefresh} />
+      <Feed setPhotos={setPhotos} />
+      <Gallery photos={photos} />
     </>
   );
 }

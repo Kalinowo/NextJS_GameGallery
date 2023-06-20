@@ -6,11 +6,11 @@ import PostModal from "./PostModal";
 import Button from "@/app/components/Button";
 
 interface feedProps {
-  setForceRefresh: any;
+  setPhotos: any;
 }
 
 export default function Feed(props: feedProps) {
-  const { setForceRefresh } = props;
+  const { setPhotos } = props;
   const [postModal, setPostModal] = useState(false);
   const { data: session } = useSession();
   function openPostModal() {
@@ -30,7 +30,7 @@ export default function Feed(props: feedProps) {
         <PostModal
           openPostModal={openPostModal}
           userId={session?.user.id}
-          setForceRefresh={setForceRefresh}
+          setPhotos={setPhotos}
         />
       )}
     </div>

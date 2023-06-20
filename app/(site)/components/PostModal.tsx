@@ -8,12 +8,11 @@ import { FaTimes } from "react-icons/fa";
 interface PostModalProps {
   openPostModal: () => void;
   userId: any;
-  setForceRefresh: any;
+  setPhotos: any;
 }
 
 const PostModal = (props: PostModalProps) => {
-  const session = useSession();
-  const { openPostModal, userId, setForceRefresh } = props;
+  const { openPostModal, userId, setPhotos } = props;
   const modalRef = useRef<HTMLInputElement>(null);
   const [postInput, setPostInput] = useState<string>("");
   const [blurHash, setBlurHash] = useState<string>("");
@@ -28,7 +27,10 @@ const PostModal = (props: PostModalProps) => {
     axios
       .post("/api/image/new", { image: postInput, userId, blurHash: blurHash })
       .then(() => {
-        setForceRefresh((prev: number) => prev + 1);
+        setPhotos((prev: object[]) => [
+          { image: postInput, blurHash: blurHash },
+          ...prev,
+        ]);
         console.log("成功");
       })
       .catch((err) => {

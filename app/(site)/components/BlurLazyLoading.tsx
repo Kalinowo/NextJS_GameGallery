@@ -8,7 +8,7 @@ interface blurProps {
 }
 
 interface photoProps {
-  id: React.Key;
+  id?: React.Key;
   image: string;
   blurHash: string;
 }
@@ -30,6 +30,7 @@ export default function BlurLazyLoading(props: blurProps) {
     const y = ((e.clientY - top) / height) * 100;
     setState({ backgroundPosition: `${x}% ${y}%` });
   };
+
   return (
     <>
       <div className="relative basis-[100%] md:basis-[calc(50%-2px)] lg:basis-[calc(33%-1.5px)] border-solid border-white border-2 shadow-2xl shadow-black">
@@ -60,7 +61,6 @@ export default function BlurLazyLoading(props: blurProps) {
             alt="screenshot"
             width={1280}
             height={720}
-            loading="lazy"
             onLoad={handleLoaded}
           />
         </div>
