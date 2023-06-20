@@ -26,6 +26,8 @@ export default function Home() {
     });
   }, []);
 
+  console.log(photos);
+
   return (
     <>
       <Feed setPhotos={setPhotos} />
