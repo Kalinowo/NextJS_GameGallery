@@ -21,13 +21,10 @@ export default function Home() {
 
   useEffect(() => {
     axios.get("/api/image/get", options).then((res) => {
-      console.log(res.data);
       console.log("sending get request");
-      setPhotos(res.data.reverse());
+      setPhotos(res.data);
     });
   }, []);
-
-  console.log(photos);
 
   return (
     <>
