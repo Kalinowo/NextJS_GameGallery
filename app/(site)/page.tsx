@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
 import Feed from "./components/Feed";
 import Gallery from "./components/Gallery";
-import axios from "axios";
 import prisma from "@/app/libs/prismadb";
 
 interface photo {
@@ -12,15 +10,17 @@ interface photo {
   blurHash: string;
 }
 
-function getPhoto() {
-  return prisma.post.findMany({
+async function getPhoto() {
+  const res = await prisma.post.findMany({
     orderBy: {
       createdAt: "desc",
     },
   });
+
+  return res;
 }
 
-export default async function Home(props: any) {
+export default async function Home() {
   const photos = await getPhoto();
 
   return (
