@@ -1,11 +1,18 @@
 import BlurLazyLoading from "./BlurLazyLoading";
+import prisma from "@/app/libs/prismadb";
 
-interface GalleryProps {
-  photos: any;
+function getPhotos() {
+  return prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }
 
-export default function Gallery(props: GalleryProps) {
-  const { photos } = props;
+interface GalleryProps {}
+
+export default async function Gallery(props: GalleryProps) {
+  const photos = await getPhotos();
 
   return (
     <div className="flex w-full h-full flex-wrap my-5 gap-1">

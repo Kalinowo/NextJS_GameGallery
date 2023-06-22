@@ -5,12 +5,9 @@ import PostModal from "./PostModal";
 
 import Button from "@/app/components/Button";
 
-interface feedProps {
-  setPhotos: any;
-}
+interface feedProps {}
 
 export default function Feed(props: feedProps) {
-  const { setPhotos } = props;
   const [postModal, setPostModal] = useState(false);
   const { data: session } = useSession();
   function openPostModal() {
@@ -27,11 +24,7 @@ export default function Feed(props: feedProps) {
       )}
 
       {postModal && (
-        <PostModal
-          openPostModal={openPostModal}
-          userId={session?.user.id}
-          setPhotos={setPhotos}
-        />
+        <PostModal openPostModal={openPostModal} userId={session?.user.id} />
       )}
     </div>
   );
