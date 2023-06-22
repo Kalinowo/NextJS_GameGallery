@@ -2,13 +2,7 @@ import Feed from "./components/Feed";
 import Gallery from "./components/Gallery";
 import prisma from "@/app/libs/prismadb";
 
-interface photo {
-  createdAt: String;
-  id: React.Key;
-  image: string;
-  userId: String;
-  blurHash: string;
-}
+export const revalidate = 10;
 
 async function getPhoto() {
   const res = await prisma.post.findMany({
