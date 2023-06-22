@@ -1,24 +1,25 @@
+"use client";
+import { useState, useEffect } from "react";
 import BlurLazyLoading from "./BlurLazyLoading";
-import prisma from "@/app/libs/prismadb";
 
-function getPhotos() {
-  return prisma.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+interface GalleryProps {
+  photos: any;
 }
 
-interface GalleryProps {}
+export default function Gallery(props: GalleryProps) {
+  const { photos } = props;
+  const [data, setData] = useState<any>();
 
-export default async function Gallery(props: GalleryProps) {
-  const photos = await getPhotos();
+  useEffect(() => {
+    setData(photos);
+  }, []);
 
   return (
     <div className="flex w-full h-full flex-wrap my-5 gap-1">
-      {photos.map((photo: any, index: any) => (
-        <BlurLazyLoading key={photo.blurHash} photo={photo} />
-      ))}
+      {data &&
+        photos.map((photo: any, index: any) => (
+          <BlurLazyLoading key={photo.blurHash} photo={photo} />
+        ))}
     </div>
   );
 }

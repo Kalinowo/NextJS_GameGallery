@@ -24,7 +24,9 @@ export default function Feed(props: feedProps) {
       )}
 
       {postModal && (
-        <PostModal openPostModal={openPostModal} userId={session?.user.id} />
+        <>
+          <PostModal openPostModal={openPostModal} userId={session?.user.id} />
+        </>
       )}
     </div>
   );

@@ -21,6 +21,7 @@ const PostModal = (props: PostModalProps) => {
       openPostModal();
     }
   }
+
   const postImage = (e: any) => {
     e.preventDefault();
     axios
