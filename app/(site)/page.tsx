@@ -2,7 +2,7 @@ import Feed from "./components/Feed";
 import Gallery from "./components/Gallery";
 import prisma from "@/app/libs/prismadb";
 
-export const revalidate = 10;
+export const revalidate = 1;
 
 async function getPhoto() {
   const res = await prisma.post.findMany({

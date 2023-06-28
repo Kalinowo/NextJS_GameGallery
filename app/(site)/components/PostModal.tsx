@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import { useSession } from "next-auth/react";
 import axios from "axios";
 import Button from "@/app/components/Button";
 import { FaTimes } from "react-icons/fa";
